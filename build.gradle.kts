@@ -6,6 +6,8 @@ plugins {
 	kotlin("jvm") version "1.5.31"
 	kotlin("plugin.spring") version "1.5.31"
 	kotlin("plugin.jpa") version "1.5.31"
+	kotlin("plugin.lombok") version "1.6.0"
+	id("io.freefair.lombok") version "5.3.0"
 }
 
 group = "com.grushevskyi"
@@ -22,7 +24,8 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	developmentOnly("org.springframework.boot:spring-boot-devtools")
+    implementation("org.projectlombok:lombok:1.18.20")
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
