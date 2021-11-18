@@ -18,7 +18,7 @@ class Trade {
     @NonNull
     var currency: String? = null
 
-    fun Trade(
+    fun performTrade(
         timestamp: Long,
         amount: Float,
         price: Float,

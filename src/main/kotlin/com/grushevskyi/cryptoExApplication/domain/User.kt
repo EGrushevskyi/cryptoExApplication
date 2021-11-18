@@ -14,6 +14,12 @@ class User {
     @OneToMany(cascade = [CascadeType.ALL], mappedBy = "user")
     private val wallets: Set<Wallet> = HashSet<Wallet>()
 
+    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "user")
+    private val orders: List<Order> = ArrayList<Order>()
+
+    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "user")
+    private val trades: List<Trade> = ArrayList<Trade>()
+
     fun getId(): Long? {
         return id
     }
