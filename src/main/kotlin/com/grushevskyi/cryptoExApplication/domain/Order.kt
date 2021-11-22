@@ -1,19 +1,19 @@
 package com.grushevskyi.cryptoExApplication.domain
 
-import javax.persistence.ManyToOne
+import lombok.NonNull
+import javax.persistence.*
 
-data class Order(
-    val id: Long,
-    var user: User,
-    val currency: String,
-    val amount: Float
-) {
+@Entity
+class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null
 
-    fun createOrder(
-        price: Float,
-        currency: String
-    ): Order {
-        return Order(id = id, user = user, currency = currency, amount = amount)
-    }
+    @ManyToOne
+    private var user: User? = null
 
+    @NonNull
+    var currency: String? = null
+
+    val amount: Float = 0f
 }

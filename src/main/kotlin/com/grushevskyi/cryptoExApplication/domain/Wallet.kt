@@ -1,20 +1,19 @@
 package com.grushevskyi.cryptoExApplication.domain
 
-import javax.persistence.ManyToOne
-
-data class Wallet(
-    val id: Long,
-    var user: User,
-    val currency: String,
-    var balance: Float
-) {
+import lombok.NoArgsConstructor
+import javax.persistence.*
 
 
-    fun updateWallet(amount: Float): Wallet {
-        return Wallet(id = id, user = user, currency = currency, balance = balance + amount)
-    }
+@Entity
+class Wallet (user: User, currency: String, balance: Float) {
 
-    fun createWallet(user: User, currency: String): Wallet {
-        return Wallet(id = id, user = user, currency = currency, balance = 0f)
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private var id: Long? = null
+
+    @ManyToOne
+    private var user: User? = null
+
+
+
 }

@@ -1,23 +1,23 @@
 package com.grushevskyi.cryptoExApplication.domain
 
+import lombok.NoArgsConstructor
 import javax.persistence.*
 
+@NoArgsConstructor
 @Entity
-class User {
+class User(email: String) {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private var id: Long? = null
 
-    private var email: String? = null
-
-    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "user")
+    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "wallet")
     private val wallets: Set<Wallet> = HashSet<Wallet>()
 
-    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "user")
+    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "order")
     private val orders: List<Order> = ArrayList<Order>()
 
-    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "user")
+    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "trade")
     private val trades: List<Trade> = ArrayList<Trade>()
 
     fun getId(): Long? {
@@ -27,14 +27,5 @@ class User {
     fun setId(id: Long?) {
         this.id = id
     }
-
-    fun getEmail(): String? {
-        return email
-    }
-
-    fun setEmail(email: String?) {
-        this.email = email
-    }
-
 
 }
