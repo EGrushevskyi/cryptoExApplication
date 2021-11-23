@@ -10,59 +10,49 @@ import com.grushevskyi.cryptoExApplication.repositories.WalletRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
-
 @Service
 class MyService {
 
-    private var userRepository: UserRepository? = null
-    private var walletRepository: WalletRepository? = null
-    private var tradeRepository: TradeRepository? = null
-    private var orderRepository: OrderRepository? = null
+    @Autowired
+    private lateinit var userRepository: UserRepository
 
     @Autowired
-    fun MyService(userRepository: UserRepository?, walletRepository: WalletRepository?) {
-        this.userRepository = userRepository
-        this.walletRepository = walletRepository
-        this.tradeRepository = tradeRepository
-        this.orderRepository = orderRepository
-    }
+    private lateinit var walletRepository: WalletRepository
+
+    @Autowired
+    private lateinit var tradeRepository: TradeRepository
+
+    @Autowired
+    private lateinit var orderRepository: OrderRepository
 
     fun addUser(email: String) {
         val userOptional = userRepository?.findByName(email)
 
         if (userOptional != null && userOptional.isPresent) {
-                throw RuntimeException("Such email is already registered")
+            throw RuntimeException("Such email is already registered")
         }
         userRepository?.save(User(email))
     }
 
     fun addWallet(user: User, currency: String) {
-        val walletOptional = walletRepository?.findByCurrency(currency)
+        val walletOptional = walletRepository.findByCurrency(currency)
 
         if (walletOptional != null && walletOptional.isPresent) {
             throw RuntimeException("Such wallet is already registered")
         }
-        walletRepository?.save(Wallet(user, currency, 0f))
+        walletRepository.save(Wallet(user, currency, 0f))
     }
 
     fun updateWallet(wallet: Wallet, user: User, currency: String, amount: Float): Wallet {
-
-
-        val walletOptional = walletRepository?.findByCurrency(currency)
-        var wallet = walletOptional?.get()
-
-        // не понятно как тут достать кошелек из репы, апдейтнуть (добавить amount к balance) и сохранить обратно
-
-        return Wallet(user = user, currency = currency, balance = amount)
-
+        val wallet = walletRepository.findByCurrency(currency).get()
+        wallet.balance += amount
+        walletRepository.save(wallet)
+        return wallet
     }
 
     fun performTrade(timestamp: Long, amount: Float, price: Float, currency: String) {
-
     }
 
     fun createOrder(order: Order) {
-
     }
-
 }

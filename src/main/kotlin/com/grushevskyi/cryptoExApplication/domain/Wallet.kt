@@ -1,11 +1,13 @@
 package com.grushevskyi.cryptoExApplication.domain
 
-import lombok.NoArgsConstructor
-import javax.persistence.*
-
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+import javax.persistence.ManyToOne
 
 @Entity
-class Wallet (user: User, currency: String, balance: Float) {
+class Wallet(user: User, val currency: String, var balance: Float) {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +15,4 @@ class Wallet (user: User, currency: String, balance: Float) {
 
     @ManyToOne
     private var user: User? = null
-
-
-
 }
