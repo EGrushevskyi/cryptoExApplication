@@ -1,13 +1,12 @@
 package com.grushevskyi.cryptoExApplication.domain
 
-import lombok.Data
 import lombok.NoArgsConstructor
 import lombok.NonNull
 import javax.persistence.*
 
 @Entity
 @NoArgsConstructor
-class Trade {
+class Trade(timestamp: Long, order: Order) {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -10,10 +10,11 @@ class Order {
     var id: Long? = null
 
     @ManyToOne
-    private var user: User? = null
+    var user: User? = null
 
-    @NonNull
-    var currency: String? = null
+    lateinit var currency: String
 
-    val amount: Float = 0f
+    var amount: Float = 0f
+
+    var price: Float = 0f
 }

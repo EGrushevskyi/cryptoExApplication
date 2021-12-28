@@ -20,12 +20,12 @@ class User(email: String) {
     @OneToMany(cascade = [CascadeType.ALL], mappedBy = "trade")
     private val trades: List<Trade> = ArrayList<Trade>()
 
-    fun getId(): Long? {
-        return id
-    }
-
-    fun setId(id: Long?) {
-        this.id = id
-    }
+//    fun getId(): Long? {
+//        return id
+//    }
+//
+//    fun setId(id: Long?) {
+//        this.id = id
+//    }
 
 }

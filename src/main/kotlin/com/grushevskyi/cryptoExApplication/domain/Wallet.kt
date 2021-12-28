@@ -14,5 +14,5 @@ class Wallet(user: User, val currency: String, var balance: Float) {
     private var id: Long? = null
 
     @ManyToOne
-    private var user: User? = null
+    var user: User? = null
 }

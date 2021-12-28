@@ -1,6 +1,7 @@
 package com.grushevskyi.cryptoExApplication.service
 
 import com.grushevskyi.cryptoExApplication.domain.Order
+import com.grushevskyi.cryptoExApplication.domain.Trade
 import com.grushevskyi.cryptoExApplication.domain.User
 import com.grushevskyi.cryptoExApplication.domain.Wallet
 import com.grushevskyi.cryptoExApplication.repositories.OrderRepository
@@ -9,6 +10,10 @@ import com.grushevskyi.cryptoExApplication.repositories.UserRepository
 import com.grushevskyi.cryptoExApplication.repositories.WalletRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.sql.Timestamp
+import java.time.Instant
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 
 @Service
@@ -30,7 +35,7 @@ class MyService {
         val userOptional = userRepository.findByName(email)
 
         if (userOptional.isPresent) {
-                throw RuntimeException("Such email is already registered")
+            throw RuntimeException("Such email is already registered")
         }
         userRepository.save(User(email))
     }
@@ -50,9 +55,16 @@ class MyService {
         walletRepository.save(wallet)
     }
 
-    fun performTrade(timestamp: Long, amount: Float, price: Float, currency: String) {
+    fun performTrade(order: Order) {
+        val timestamp = System.currentTimeMillis()
+        val currency = order.currency
+        val amount = order.amount
+        val trade = Trade(timestamp, order)
 
+        updateWallet(currency, amount)
+        tradeRepository.save(trade)
     }
+
 
     fun createOrder(order: Order) {
         orderRepository.save(Order())
@@ -64,5 +76,5 @@ class MyService {
             orderRepository.delete(orderToCancel)
         }
     }
-
 }
+
