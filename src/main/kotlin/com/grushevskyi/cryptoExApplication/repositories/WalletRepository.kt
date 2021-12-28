@@ -7,5 +7,4 @@ import java.util.*
 
 interface WalletRepository : CrudRepository<Wallet, Long> {
     fun findByCurrency(currency: String?): Optional<Wallet>
-
 }
