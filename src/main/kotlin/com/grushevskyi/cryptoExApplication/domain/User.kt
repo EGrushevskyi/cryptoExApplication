@@ -3,21 +3,21 @@ package com.grushevskyi.cryptoExApplication.domain
 import lombok.NoArgsConstructor
 import javax.persistence.*
 
-@NoArgsConstructor
+//@NoArgsConstructor
 @Entity
-class User(email: String) {
+class User(var email: String) {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private var id: Long? = null
 
-    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "wallet")
+    @OneToMany(cascade = [CascadeType.ALL])
     private val wallets: Set<Wallet> = HashSet<Wallet>()
 
-    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "order")
+    @OneToMany(cascade = [CascadeType.ALL])
     private val orders: List<Order> = ArrayList<Order>()
 
-    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "trade")
+    @OneToMany(cascade = [CascadeType.ALL])
     private val trades: List<Trade> = ArrayList<Trade>()
 
 //    fun getId(): Long? {

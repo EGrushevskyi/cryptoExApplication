@@ -2,8 +2,10 @@ package com.grushevskyi.cryptoExApplication.repositories
 
 import com.grushevskyi.cryptoExApplication.domain.User
 import org.springframework.data.repository.CrudRepository
+import org.springframework.stereotype.Repository
 import java.util.*
 
+@Repository
 interface UserRepository : CrudRepository<User, Long> {
-    fun findByName(email: String?): Optional<User>
+    fun findByEmail(email: String?): Optional<User>
 }

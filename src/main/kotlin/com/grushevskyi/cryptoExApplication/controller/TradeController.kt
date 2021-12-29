@@ -21,7 +21,7 @@ class TradeController {
     private lateinit var tradeRepository: TradeRepository
 
     @GetMapping("/show_trades")
-    fun showOrders(@RequestParam("user") user: User): List<Trade> {
+    fun showTrades(@RequestParam("user") user: User): List<Trade> {
         return tradeRepository.findAll().filter { it.user ==  user}
     }
 

@@ -32,7 +32,7 @@ class MyService {
     private lateinit var orderRepository: OrderRepository
 
     fun addUser(email: String) {
-        val userOptional = userRepository.findByName(email)
+        val userOptional = userRepository.findByEmail(email)
 
         if (userOptional.isPresent) {
             throw RuntimeException("Such email is already registered")
